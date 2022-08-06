@@ -7,8 +7,14 @@ const signUpSchema = Joi.object({
     confirm_password:Joi.ref('password')
 });
 
+const signInSchema = Joi.object({
+    email:Joi.string().email().required(),
+    password: Joi.string().required()
+});
+
 const authSchemas = {
-    signUpSchema
+    signUpSchema,
+    signInSchema
 }
 
 export default authSchemas;

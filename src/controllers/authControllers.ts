@@ -8,8 +8,14 @@ async function signUp(req:Request, res:Response){
     res.sendStatus(201);
 }
 
+async function signIn(req:Request, res:Response){
+    const user = await authServices.userLogin(req.body);
+    res.status(200).send(user);
+}
+
 const authControllers = {
-    signUp
+    signUp,
+    signIn
 }
 
 export default authControllers;
