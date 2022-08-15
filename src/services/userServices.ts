@@ -33,6 +33,13 @@ function generateToken(userId:number){
     return token;
 }
 
+function verifyToken(token:string){
+    const secretKey = process.env.JWT_SECRET;
+    const verify = jwt.verify(token, secretKey);
+    return verify;
+
+}
+
 async function createNewUser(data:CreateUserData){
     const userExist = await findByEmail(data.email);
     if(userExist) throw {type:"conflict", message:"this user already exist!"};
@@ -53,7 +60,8 @@ async function userLogin(data:LoginUserData){
 
 const authServices = {
     createNewUser,
-    userLogin
+    userLogin,
+    verifyToken
 }
 
 export default authServices;

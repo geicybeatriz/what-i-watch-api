@@ -24,10 +24,9 @@ model movies_list {
   id  Int @id @default(autoincrement())
   name String
   createdAt DateTime @default(now())
-  movieId Int
-  movie  Movie   @relation(fields: [movieId], references: [id])
   userId Int
   user   User   @relation(fields: [userId], references: [id])
+  movies Movie[]
 
   @@map("moviesList")
 }
@@ -38,7 +37,8 @@ model Movie {
   image String 
   tmdbId String
   createdAt DateTime @default(now())
-  moviesList movies_list[]
+  listId Int
+  list movies_list @relation(fields: [listId], references: [id])
 
   @@map("movies")
 }
