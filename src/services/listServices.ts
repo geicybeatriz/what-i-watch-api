@@ -21,9 +21,24 @@ async function createList(name:string, userId:number ){
     return;
 }
 
+async function findAllLists(userId:number){
+    await findUserById(userId);
+    const lists = await listRepository.findAllLists(userId);
+    return lists;
+}
+
+async function findListById(userId:number, id:number){
+    await findUserById(userId);
+    const list = await listRepository.findListById(id, userId);
+    if(!list) throw {type:"not found", message:"list is not found"};
+    return list;
+}
+
 const listServices = {
     createList,
-    findUserById
+    findUserById,
+    findAllLists,
+    findListById
 }
 
 export default listServices;
