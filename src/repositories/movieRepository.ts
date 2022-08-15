@@ -13,9 +13,25 @@ async function findAllMoviesByListId(listId:number){
     })
 }
 
+async function findMovieByListId(listId:number, id:number){
+    return await prisma.movie.findFirst({
+        where:{id, listId}
+    });
+}
+
+async function deleteMovie(id:number){
+    return await prisma.movie.delete({
+        where:{
+            id
+        }
+    })
+}
+
 const movieRepository = {
     findAllMoviesByListId,
-    insert
+    insert,
+    deleteMovie,
+    findMovieByListId
 }
 
 export default movieRepository;
