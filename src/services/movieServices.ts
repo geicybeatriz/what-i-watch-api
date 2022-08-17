@@ -14,6 +14,7 @@ async function insertMovie(data:CreateMovieData, userId:number){
 
 async function findMoviesByList(listId:number, userId:number){
     await listServices.findUserById(userId);
+    
     const listExist = await listRepository.findListById(listId, userId);
     if(!listExist) throw {type:"not found", message:"list is not found"};
 
